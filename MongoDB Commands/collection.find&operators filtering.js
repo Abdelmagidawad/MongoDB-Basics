@@ -36,3 +36,15 @@
 =>=>db.collection-Name.find({filed:{$ne:value}}).pretty()
 =>db.books.find({Pages:{$ne:100}}) // to get documents with pages!=100 
 
+// -And ,Or Condition-
+
+// $and => returns true if all of the expressions are true
+// Syntax => {$and:[{k1,v1},{k2,v2},{k3,v3}]}
+=>db.books.find({$and:[{Pages:{$gt:100}},{Pages:{$lt:500}}]}) //to get all books with pages>100 and pages<500
+=>db.books.find({Pages:100,Title:"Book1"}) //to get document book with pages=100 and title=Book1
+
+// $or => first true expression
+// Syntax => {$or:[{k1,v1},{k2,v2},{k3,v3}]}
+=>db.books.find({$or:[{Pages:{$lt:100}},{Pages:{$gt:200}}]}) //to get all books with pages<100 and pages>200
+=>db.books.find({$or:[{Title:"Book4"},{$and:[{Pages:{$gt:0}},{Pages:{$lt:100}}]}]})
+//to get document book with title=Book4 or all books with pages in range 0 to 100
